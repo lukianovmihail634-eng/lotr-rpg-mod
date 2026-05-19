@@ -14,22 +14,22 @@
 @rem limitations under the License.
 @rem
 
-@if "%DEBUG%"==\"\" @echo off
+@if "%DEBUG%"=="" @echo off
 @rem ##########################################################################
 @rem
 @rem  Gradle startup script for Windows
 @rem
 @rem ##########################################################################
 
-setlocal
+setlocal enabledelayedexpansion
 
 set DIRNAME=%~dp0
-if "%DIRNAME%"==\"\" set DIRNAME=.
+if "%DIRNAME%"=="" set DIRNAME=.
 set APP_BASE_NAME=%~n0
 set APP_HOME=%DIRNAME%
 
-@rem Resolve any \".\"
-if "%APP_HOME:~-1%"==\"\" (
+@rem Resolve any "."
+if "%APP_HOME:~-1%"=="" (
   cd /d "%APP_HOME%"
 )
 
@@ -37,7 +37,7 @@ if exist "%APP_HOME%\gradle\wrapper\gradle-wrapper.jar" (
     @rem Find java.exe
     if defined JAVA_HOME goto findJavaFromJavaHome
     
-    for /f \"usebackq delims=\" %%a in ('where java.exe 2^>nul') do set JAVA_EXE=%%a
+    for /f "usebackq delims=" %%a in ('where java.exe 2^>nul') do set JAVA_EXE=%%a
     if defined JAVA_EXE goto execute
     
     echo.
@@ -50,7 +50,7 @@ if exist "%APP_HOME%\gradle\wrapper\gradle-wrapper.jar" (
 )
 
 :findJavaFromJavaHome
-set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+set JAVA_EXE=%JAVA_HOME%\bin\java.exe
 if exist "%JAVA_EXE%" goto execute
 
 echo.
@@ -67,12 +67,12 @@ goto fail
 set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
 
 @rem Execute Gradle
-\"%JAVA_EXE%\" %DEFAULT_JVM_OPTS% %JAVA_OPTS% -classpath \"%CLASSPATH%\" org.gradle.wrapper.GradleWrapperMain %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
 
 :end
 @endlocal & set ERROR_CODE=%ERRORLEVEL%
 
-if not \"%ERROR_CODE%\"==\"0\" goto fail
+if not "%ERROR_CODE%"=="0" goto fail
 
 exit /b %ERROR_CODE%
 
